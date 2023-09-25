@@ -67,13 +67,13 @@ function nombre_barrio(letra_inicial){
     
 }
 
-const porcentaje = 0.03;
-let direccion_email_2;
-let barrio_alquilar;
-let barrio_comprar;
-let valor_vender;
-let continuar = true;
-let contador_email = 0;
+const porcentaje = 0.03; // valor de la comisión
+let direccion_email_2; // reingreso de la dirección de email
+let barrio_alquilar; // opción elegida para el barrio donde alquilar
+let barrio_comprar; // opción elegida para el barrio donde comprar
+let valor_vender; // valor de la propiedad que uno desea vender
+let continuar = true; // variable de control de while
+let contador_email = 0; // variable de intentos de login, tanto para direccion_email_1 como para direccion_email_2
 
 let direccion_email_1 = prompt("Ingrese su dirección de email");
 while (continuar && contador_email < 3) {
