@@ -6,9 +6,13 @@
 
 h1 {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 40px;
+    font-size: 60px;
     color: blue;
     background-color: grey;
-    display: flex;
-    justify-content: center;
+    display: inline-block;
+    position: relative;
+    top: 200px;
+    left: 50px;
+    padding: 50px;
+    
 }
