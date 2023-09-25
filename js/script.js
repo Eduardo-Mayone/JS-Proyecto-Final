@@ -1,8 +1,7 @@
-/* Dado que es un sitio web sin login y se intenta enviar información por email, lo que se hace es solicitarle al usuario
+/* Es el portal de una inmobiliaria.
+ Dado que es un sitio web sin login y se intenta enviar información por email, lo que se hace es solicitarle al usuario
    que ingrese su dirección de email y que la ingrese nuevamente para chequear que es la dirección correcta.
 */
-
-
 
 /* La función validar_correo no comprueba 100% si una dirección es válida. 
 Sólo se comprueba que no empiece por @ (no por todos lo caracteres no válidos).
