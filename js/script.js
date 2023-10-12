@@ -17,27 +17,42 @@ const propiedades_disponibles = [
         precio: 110000,
     },
     {
-        id:"a2" ,
+        id:"c1" ,
         barrio: "Carrasco",
         tipo: "apartamento",
         modalidad: "alquiler",
         precio: 22500,    
     },
     {
-        id:"a3" ,
+        id:"b1" ,
         barrio: "Buceo",
         tipo: "apartamento",
         modalidad: "venta",
         precio: 54000,    
     },
     {
-        id:"a4" ,
+        id:"a2" ,
         barrio: "Aguada",
         tipo: "apartamento",
         modalidad: "alquiler",
         precio: 16500,    
     },
-]
+    {
+        id:"a3" ,
+        barrio: "Aguada",
+        tipo: "apartamento",
+        modalidad: "alquiler",
+        precio: 13500,    
+    },
+    {
+    id:"a4" ,
+    barrio: "Aguada",
+    tipo: "apartamento",
+    modalidad: "venta",
+    precio: 223500,    
+},
+];
+
 function validar_correo (direccion) {
     let correo_valido = false;
     let contador_arroba = 0;
@@ -103,8 +118,8 @@ let valor_vender; // valor de la propiedad que uno desea vender
 let continuar = true; // variable de control de while
 let contador_email = 0; // variable de intentos de login, tanto para direccion_email_1 como para direccion_email_2
 
-const mostrar_para_alquilar = (barrio_elegido,opcion_elegida) => {
-    let mensaje = `Las propiedades disponibles en el barrio ${nombre_barrio(barrio_alquilar)} son: \n`;
+const mostrar_para_alquilar = (barrio_elegido, opcion_elegida) => {
+    let mensaje = `Las propiedades disponibles en el barrio ${barrio_elegido} son: \n`;
     let prop_a_mostrar = [];
     
     for (const prop of propiedades_disponibles) {
@@ -118,7 +133,29 @@ const mostrar_para_alquilar = (barrio_elegido,opcion_elegida) => {
         }
     }    
     else {
-       mensaje = `No hay propiedades disponibles en el barrio ${nombre_barrio(barrio_alquilar)}.\n`;
+       mensaje = `No hay propiedades para alquilar en el barrio ${barrio_elegido}.\n`;
+       
+    } 
+    
+    return mensaje;
+}
+
+const mostrar_para_comprar = (barrio_elegido, opcion_elegida) => {
+    let mensaje = `Las propiedades disponibles en el barrio ${barrio_elegido} son: \n`;
+    let prop_a_mostrar = [];
+    
+    for (const prop of propiedades_disponibles) {
+        if (prop.barrio === barrio_elegido && prop.modalidad === opcion_elegida) {
+            prop_a_mostrar.push(prop);
+        }
+    }        
+    if (prop_a_mostrar.length != 0) {
+        for (elemento of prop_a_mostrar) {
+            mensaje += `Código: ${elemento.id}\n Tipo: ${elemento.tipo}\n Precio: ${elemento.precio}\n-----------------------\n`;
+        }
+    }    
+    else {
+       mensaje = `No hay propiedades a la venta en el barrio ${barrio_elegido}.\n`;
     } 
     
     return mensaje;
@@ -137,7 +174,7 @@ while (continuar && contador_email < 3) {
                 case "1": barrio_alquilar = prompt("Indique en que barrio desea alquilar: \n A - Aguada \n B - Buceo \n C - Carrasco");
                           if (nombre_barrio(barrio_alquilar) !== "Nulo") {
                            //alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_alquilar) +".\n A la dirección de correo: " + direccion_email_1);
-                           alert (`${mostrar_para_alquilar(nombre_barrio(barrio_alquilar), opciones)}Esta información se enviará a: ${direccion_email_1}`);
+                           alert (`${mostrar_para_alquilar(nombre_barrio(barrio_alquilar), "alquiler")}Esta información se enviará a: ${direccion_email_1}`);
                            break;
                           }
                           else {
@@ -147,7 +184,8 @@ while (continuar && contador_email < 3) {
 
                 case "2": barrio_comprar = prompt("Indique en que barrio desea comprar: \n A - Aguada \n B - Buceo \n C - Carrasco");
                          if (nombre_barrio(barrio_comprar) !== "Nulo") {
-                            alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_comprar) +".\n A la dirección de correo: " + direccion_email_1);
+                            //alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_comprar) +".\n A la dirección de correo: " + direccion_email_1);
+                            alert (`${mostrar_para_comprar(nombre_barrio(barrio_comprar), "venta")}Esta información se enviará a: ${direccion_email_1}`);
                             break;
                          }
                          else {
