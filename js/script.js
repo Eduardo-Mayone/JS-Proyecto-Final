@@ -8,7 +8,36 @@ Sólo se comprueba que no empiece por @ (no por todos lo caracteres no válidos)
 Que haya un solo @.
 Que en la parte del dominio no empiece ni termine con ".", ni que haya ".." o más
 */
-
+const propiedades_disponibles = [
+    {
+        id:"a1" ,
+        barrio: "Aguada",
+        tipo: "casa",
+        modalidad: "venta",
+        precio: 110000,
+    },
+    {
+        id:"a2" ,
+        barrio: "Carrasco",
+        tipo: "apartamento",
+        modalidad: "alquiler",
+        precio: 22500,    
+    },
+    {
+        id:"a3" ,
+        barrio: "Buceo",
+        tipo: "apartamento",
+        modalidad: "venta",
+        precio: 54000,    
+    },
+    {
+        id:"a4" ,
+        barrio: "Aguada",
+        tipo: "apartamento",
+        modalidad: "alquiler",
+        precio: 16500,    
+    },
+]
 function validar_correo (direccion) {
     let correo_valido = false;
     let contador_arroba = 0;
@@ -74,6 +103,27 @@ let valor_vender; // valor de la propiedad que uno desea vender
 let continuar = true; // variable de control de while
 let contador_email = 0; // variable de intentos de login, tanto para direccion_email_1 como para direccion_email_2
 
+const mostrar_para_alquilar = (barrio_elegido,opcion_elegida) => {
+    let mensaje = `Las propiedades disponibles en el barrio ${nombre_barrio(barrio_alquilar)} son: \n`;
+    let prop_a_mostrar = [];
+    
+    for (const prop of propiedades_disponibles) {
+        if (prop.barrio === barrio_elegido && prop.modalidad === opcion_elegida) {
+            prop_a_mostrar.push(prop);
+        }
+    }        
+    if (prop_a_mostrar.length != 0) {
+        for (elemento of prop_a_mostrar) {
+            mensaje += `Código: ${elemento.id}\n Tipo: ${elemento.tipo}\n Precio: ${elemento.precio}\n-----------------------\n`;
+        }
+    }    
+    else {
+       mensaje = `No hay propiedades disponibles en el barrio ${nombre_barrio(barrio_alquilar)}.\n`;
+    } 
+    
+    return mensaje;
+}
+
 let direccion_email_1 = prompt("Ingrese su dirección de email");
 while (continuar && contador_email < 3) {
     if (validar_correo(direccion_email_1)) {
@@ -86,8 +136,9 @@ while (continuar && contador_email < 3) {
                 switch (opciones) {
                 case "1": barrio_alquilar = prompt("Indique en que barrio desea alquilar: \n A - Aguada \n B - Buceo \n C - Carrasco");
                           if (nombre_barrio(barrio_alquilar) !== "Nulo") {
-                            alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_alquilar) +".\n A la dirección de correo: " + direccion_email_1);
-                            break;
+                           //alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_alquilar) +".\n A la dirección de correo: " + direccion_email_1);
+                           alert (`${mostrar_para_alquilar(nombre_barrio(barrio_alquilar), opciones)}Esta información se enviará a: ${direccion_email_1}`);
+                           break;
                           }
                           else {
                             alert ("No contamos con propiedades en ese barrio.");
