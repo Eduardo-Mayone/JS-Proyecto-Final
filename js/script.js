@@ -1,6 +1,9 @@
 /* Es el portal de una inmobiliaria.
- Dado que es un sitio web sin login y se intenta enviar información por email, lo que se hace es solicitarle al usuario
-   que ingrese su dirección de email y que la ingrese nuevamente para chequear que es la dirección correcta.
+ En la entrega 1 era un sitio web sin login y se enviaba información por email, lo que se hace es solicitarle al usuario
+ que ingrese su dirección de email y que la ingrese nuevamente para chequear que es la dirección correcta.
+Para la entrega 2 se quitó la opción Vender y se agregó Operador Inmobiliario que tiene login.
+Usuario: Juan
+Password: 2222
 */
 
 /* La función validar_correo no comprueba 100% si una dirección es válida. 
@@ -52,6 +55,16 @@ const propiedades_disponibles = [
     precio: 223500,    
 },
 ];
+
+const barrios_habilitados = ["Aguada", "Buceo", "Carrasco"];
+
+const operador_inmobiliario = {
+    usuario: "Juan",
+    password: "2222",
+}
+
+const tipo_de_propiedad = ["apartamento", "casa"];
+const tipo_de_negocio = ["alquiler", "venta"];
 
 function validar_correo (direccion) {
     let correo_valido = false;
@@ -118,6 +131,23 @@ let valor_vender; // valor de la propiedad que uno desea vender
 let continuar = true; // variable de control de while
 let contador_email = 0; // variable de intentos de login, tanto para direccion_email_1 como para direccion_email_2
 
+
+//función para chequer que no esté el id usado
+const id_no_disponible = (identificador) => {
+    let id_usado;
+    for (const prop of propiedades_disponibles) {
+        if (prop.id === identificador) {
+            id_usado = true;
+            break;
+        }
+        else {
+            id_usado = false;
+        }
+    }
+    return id_usado;
+}
+
+// función para mostrar las propiedades que están en el barrio deseado y que estén en la para alquilar
 const mostrar_para_alquilar = (barrio_elegido, opcion_elegida) => {
     let mensaje = `Las propiedades disponibles en el barrio ${barrio_elegido} son: \n`;
     let prop_a_mostrar = [];
@@ -140,6 +170,7 @@ const mostrar_para_alquilar = (barrio_elegido, opcion_elegida) => {
     return mensaje;
 }
 
+// función para mostrar las propiedades que están en el barrio deseado y que estén en la para la venta
 const mostrar_para_comprar = (barrio_elegido, opcion_elegida) => {
     let mensaje = `Las propiedades disponibles en el barrio ${barrio_elegido} son: \n`;
     let prop_a_mostrar = [];
@@ -166,14 +197,13 @@ while (continuar && contador_email < 3) {
     if (validar_correo(direccion_email_1)) {
         direccion_email_2 = prompt("Ingrese nuevamente su dirección de email");
         if (direccion_email_1 === direccion_email_2) {
-            let opciones = prompt ("\"Bienvenido a Inmobiliaria XXXX\" \n ¿Qué desea hacer? \n 1 - Alquilar\n 2 - Comprar\n 3 - Vender\n 4 - Salir");
+            let opciones = prompt ("\"Bienvenido a Inmobiliaria XXXX\" \n ¿Qué desea hacer? \n 1 - Alquilar\n 2 - Comprar\n 3 - Operador Inmobiliario\n 4 - Salir");
 
             while (opciones != "4") {
 
                 switch (opciones) {
                 case "1": barrio_alquilar = prompt("Indique en que barrio desea alquilar: \n A - Aguada \n B - Buceo \n C - Carrasco");
                           if (nombre_barrio(barrio_alquilar) !== "Nulo") {
-                           //alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_alquilar) +".\n A la dirección de correo: " + direccion_email_1);
                            alert (`${mostrar_para_alquilar(nombre_barrio(barrio_alquilar), "alquiler")}Esta información se enviará a: ${direccion_email_1}`);
                            break;
                           }
@@ -184,7 +214,6 @@ while (continuar && contador_email < 3) {
 
                 case "2": barrio_comprar = prompt("Indique en que barrio desea comprar: \n A - Aguada \n B - Buceo \n C - Carrasco");
                          if (nombre_barrio(barrio_comprar) !== "Nulo") {
-                            //alert ("Le enviaremos las propiedades disponibles en el barrio: " + nombre_barrio(barrio_comprar) +".\n A la dirección de correo: " + direccion_email_1);
                             alert (`${mostrar_para_comprar(nombre_barrio(barrio_comprar), "venta")}Esta información se enviará a: ${direccion_email_1}`);
                             break;
                          }
@@ -193,24 +222,74 @@ while (continuar && contador_email < 3) {
                             break;
                          }    
 
-                case "3": valor_vender = parseInt(prompt("Indique el precio solicitado y le indicaremos el monto de nuestra comisión"));
-                          let chequeo_numero = isNaN(valor_vender);
-                          if (!chequeo_numero && (valor_vender > 0)) {
-                              const comision = (x,y) => x*y;
-                              alert("Nuestra comisión es de USD " + comision(valor_vender,porcentaje));
-                            break;
+                case "3":  const usuario = prompt ("Ingrese su usuario de Operador Inmobiliario");
+                           const contrasena = prompt ("Ingrese su contraseña");
+
+                           if ( usuario === operador_inmobiliario.usuario && contrasena === operador_inmobiliario.password) {
+                             alert ("Bienvenido al Portal");
+                             const ingresar_id = () => {
+                                    let identificador = prompt("Ingrese el id de la propiedad");
+                                    if (identificador === "" || id_no_disponible(identificador)) {  // chequeo que el campo no esté vacío y que el id esté disponible
+                                        alert ("Id no válido");
+                                        return ingresar_id();
+                                    }
+                                    return identificador;
+                                }
+
+                             const ingresar_barrio = () => {
+                                    let nom_barrio = prompt("Ingrese el barrio de la propiedad");
+                                    if (nom_barrio === "" || !barrios_habilitados.includes(nom_barrio)) {  // chequeo que el campo no esté vacío y que el barrio sea válido
+                                        alert ("Barrio no válido");
+                                        return ingresar_barrio();
+                                    }
+                                    return nom_barrio;
+                                }
+
+                             const ingresar_tipo = () => {
+                                    let tipo_propiedad = prompt("Ingrese si es casa o apartamento");
+                                    if (tipo_propiedad === "" || !(tipo_de_propiedad.includes(tipo_propiedad))) {  // chequeo que el campo no esté vacío y que la propiedad sea válida
+                                        alert ("Tipo no válido");
+                                        return ingresar_tipo();
+                                    }
+                                    return tipo_propiedad;
+                                }
+
+                                const ingresar_modalidad = () => {
+                                    let modalidad = prompt("Ingrese si es para alquiler o venta");
+                                    if (modalidad === "" || !(tipo_de_negocio.includes(modalidad))) {  // chequeo que el campo no esté vacío y que el negocio sea válido
+                                        alert ("Negocio no válido");
+                                        return ingresar_modalidad();
+                                    }
+                                    return modalidad;
+                                }
+
+                                const ingresar_precio = () => {
+                                    let precio_ingresado = parseFloat(prompt("Ingrese el precio de la propiedad"));
+                                    if (isNaN(precio_ingresado)) {  // chequeo que el campo sea un número
+                                        alert ("Ingrese un número");
+                                        return ingresar_precio();
+                                    }
+                                    return precio_ingresado;
+                                }
+
+                                propiedades_disponibles.push({
+                                    id: ingresar_id(),
+                                    barrio: ingresar_barrio(),
+                                    tipo: ingresar_tipo(),
+                                    modalidad: ingresar_modalidad(),
+                                    precio: ingresar_precio(),                            
+                                });
+                                break;
                           }
                           else {
-                            alert("El valor ingresado no es un número válido");
-                            break;
+                            alert("usuario o contraseña incorrecta");
                           }
 
                 default: alert ("Opción no válida");
                          break;
 
                 }
-                opciones = prompt ("\"Bienvenido a Inmobiliaria XXXX\" \n ¿Qué desea hacer? \n 1 - Alquilar\n 2 - Comprar\n 3 - Vender\n 4 - Salir");
-           
+                opciones = prompt ("\"Bienvenido a Inmobiliaria XXXX\" \n ¿Qué desea hacer? \n 1 - Alquilar\n 2 - Comprar\n 3 - Operador Inmobiliario\n 4 - Salir");
             }
             continuar = false;  // elegí opción 4 y se quiere salir  
         }
