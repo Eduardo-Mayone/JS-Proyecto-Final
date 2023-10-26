@@ -11,43 +11,49 @@ const propiedades_disponibles = [
     {
         id:"a1" ,
         barrio: "Aguada",
-        tipo: "casa",
-        modalidad: "venta",
+        tipo: "Casa",
+        modalidad: "Venta",
+        foto:"../assets/images/aguada_a1.jpg",
         precio: 110000,
     },
     {
         id:"c1" ,
         barrio: "Carrasco",
-        tipo: "apartamento",
-        modalidad: "alquiler",
+        tipo: "Apartamento",
+        modalidad: "Alquiler",
+        foto:"../assets/images/carrasco_c1.jpg",
         precio: 22500,    
     },
     {
         id:"b1" ,
         barrio: "Buceo",
-        tipo: "apartamento",
-        modalidad: "venta",
+        tipo: "Apartamento",
+        modalidad: "Venta",
+        foto:"../assets/images/buceo_b1.jpg",
         precio: 54000,    
     },
     {
         id:"a2" ,
         barrio: "Aguada",
-        tipo: "apartamento",
-        modalidad: "alquiler",
+        tipo: "Apartamento",
+        modalidad: "Alquiler",
+        foto:"../assets/images/aguada_a2.jpg",
         precio: 16500,    
     },
     {
         id:"a3" ,
         barrio: "Aguada",
-        tipo: "apartamento",
-        modalidad: "alquiler",
+        tipo: "Apartamento",
+        modalidad: "Alquiler",
+        foto:"../assets/images/aguada_a3.jpg",
         precio: 13500,    
     },
     {
     id:"a4" ,
     barrio: "Aguada",
-    tipo: "apartamento",
-    modalidad: "venta",
+    tipo: "Apartamento",
+    modalidad: "Venta",
+    foto:"../assets/images/aguada_a4.jpg",
     precio: 223500,    
 },
 ];
@@ -71,7 +77,7 @@ function pedirCorreo () {
         <label for="email_2">Reingrese su Email</label>
         <input type="email" id="email_2" name="email_2">
     </div>
-    <button type="submit">Enviar</button>
+    <button class="enviar" type="submit">Enviar</button>
 </form>`;
 document.getElementById("boton_operador").disabled = true;
 despliego_formulario();
@@ -130,24 +136,74 @@ function valido_email(e) {
 }
 
 function mostrar_propiedades() {
-    const contenedor = document.querySelector('.box-product');  
-for (const propiedad of propiedades_disponibles) {
-    contenedor.innerHTML += `
-    <article id=${propiedad.id} class="box">
+    const contenedor = document.querySelector('.box_propiedad');  
+    for (const propiedad of propiedades_disponibles) {
+        contenedor.innerHTML += `
+        <article id=${propiedad.id} class="box">
         
-        <div class="prod__body">
-            <h3>${propiedad.barrio}</h3>
-            <p>${propiedad.tipo}</p>
-            <b>${propiedad.precio}</b>
-            <button onclick="agregarAlCarrito('${propiedad.id}')">Agregar al carrito</button>
+            <div class="propiedad_body">
+                <h3>${propiedad.tipo} en barrio: ${propiedad.barrio}</h3>
+                <img src= ${propiedad.foto} alt= "imagen propiedad">
+                <h3>En ${propiedad.modalidad}</h3>
+                <h3>Valor: <i>$${propiedad.precio}</i></h3>
+                <button class= "boton_solicitar" onclick="solicitarInformacion('${propiedad.id}')">Solicitar Información</button>
             
-        </div>
-    </article>`;
+            </div>
+        </article>`;
+    }
 }
 
+let listado= [];
+
+if (localStorage.getItem('listado')) {
+    listado = JSON.parse(localStorage.getItem('listado'));
+    console.log(listado)
 }
 
+function solicitarInformacion(id) {
+    console.log ("solicito información");
+    const info_propiedad = propiedades_disponibles.find((propiedad) => propiedad.id === id);
+    // Si la propiedad no se agregó, incluirla
+    if (info_propiedad && !listado.some((item) => item.id === id)) {
+        listado.push(info_propiedad);
+        localStorage.setItem('listado', JSON.stringify(listado));
+        console.log(listado)
+    }
+    mostrarListadoPropiedades();
 
+}
+
+function mostrarListadoPropiedades() {
+     const listado_elementos = document.querySelector('.lado_derecho');
+     listado_elementos.innerHTML = '';
+     const titulo = document.createElement("h3");
+     titulo.innerHTML= `
+     <h3>PROPIEDADES SELECCIONADAS</h3>
+     `
+     listado_elementos.appendChild(titulo);
+
+     listado.forEach((item) => {
+         const listadoItem = document.createElement('div');
+         //listadoItem.classList.add('carrito-item');
+         listadoItem.innerHTML = `
+         <article class="listado_contenedor">
+             <img src=${item.foto} alt='imagen de la propiedad en barrio ${item.barrio}'>
+            <div class="listado_card">
+                <p>Barrio: ${item.barrio} - Precio: $${item.precio}</p>
+            </div>
+             <a class="borrar-button" data-id="${item.id}"><span><i class="bi bi-trash"></i></span></a>
+         </article>
+       `;
+
+//         const eliminarButton = carritoItem.querySelector('.borrar-button');
+//         eliminarButton.addEventListener('click', () => {
+//             borrarViaje(item.id);
+//         });
+
+         listado_elementos.appendChild(listadoItem);
+     });
+
+}
 
 
 
