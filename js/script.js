@@ -114,7 +114,7 @@ function despliego_formulario () {
 
 const formulario = document.getElementById("ingrese_email")
 formulario.addEventListener("submit", valido_email);
-console.log("en formulario");
+
 }
 
 
@@ -187,25 +187,42 @@ function mostrarListadoPropiedades() {
          //listadoItem.classList.add('carrito-item');
          listadoItem.innerHTML = `
          <article class="listado_contenedor">
-             <img src=${item.foto} alt='imagen de la propiedad en barrio ${item.barrio}'>
+            <img src=${item.foto} alt='imagen de la propiedad en barrio ${item.barrio}'>
             <div class="listado_card">
-                <p>Barrio: ${item.barrio} - Precio: $${item.precio}</p>
+                <p>Barrio: ${item.barrio} </p>
+                <p>Precio: $${item.precio}</p>
             </div>
-             <a class="borrar-button" data-id="${item.id}"><span><i class="bi bi-trash"></i></span></a>
+            <a class="boton_eliminar" data-id="${item.id}">Eliminar</a>
          </article>
        `;
 
-//         const eliminarButton = carritoItem.querySelector('.borrar-button');
-//         eliminarButton.addEventListener('click', () => {
-//             borrarViaje(item.id);
-//         });
+         const eliminarButton = listadoItem.querySelector('.boton_eliminar');
+         eliminarButton.addEventListener('click', () => {
+             borrar_propiedad(item.id);
+         });
 
          listado_elementos.appendChild(listadoItem);
      });
 
 }
 
+function borrar_propiedad(id) {
+    const index = listado.findIndex((item) => item.id === id);
 
+    if (index !== -1) {
+        listado.splice(index, 1);
+        localStorage.setItem('listado', JSON.stringify(listado));
+
+        const listadoElement = document.querySelector('.lado_derecho');
+        const itemElement = document.getElementById(id);
+
+        if (itemElement) {
+            itemElement.remove();
+        }
+
+       mostrarListadoPropiedades();
+    }
+}
 
 
 
