@@ -117,7 +117,7 @@ formulario.addEventListener("submit", valido_email);
 
 }
 
-
+// función para comprobar que el email y su reingreso es el mismo
 function valido_email(e) {
     e.preventDefault();
     const email_1 = document.getElementById("email_1");
@@ -138,6 +138,7 @@ function valido_email(e) {
     }
 }
 
+// muestra todas la propiedades disponibles
 function mostrar_propiedades() {
 console.log("estoy en mostrar propiedad");    
     const contenedor = document.querySelector('.box_propiedad');
@@ -164,6 +165,7 @@ if (localStorage.getItem('listado')) {
     listado = JSON.parse(localStorage.getItem('listado'));
 }
 
+// agrega en listado las propiedades sobre las cuales se quiere información
 function solicitarInformacion(id) {
     const info_propiedad = propiedades_disponibles.find((propiedad) => propiedad.id === id);
 console.log("en solicitar informacion");
@@ -177,9 +179,9 @@ console.log(info_propiedad);
 console.log(listado);
     }
     mostrarListadoPropiedades();
-
 }
 
+// muestra las propiedades seleccionadas en la sección lado derecho de la página
 function mostrarListadoPropiedades() {
 
      const listado_elementos = document.querySelector('.lado_derecho');
@@ -225,7 +227,7 @@ function borrar_propiedad(id) {
     if (index !== -1) {
         listado.splice(index, 1);
         localStorage.setItem('listado', JSON.stringify(listado));
-        const listadoElement = document.querySelector('.lado_derecho');
+
         const itemElement = document.getElementById(id);
 
         if (itemElement) {
