@@ -1,9 +1,9 @@
 /* Es el portal de una inmobiliaria.
- En la entrega 1 era un sitio web sin login y se enviaba información por email, lo que se hace es solicitarle al usuario
- que ingrese su dirección de email y que la ingrese nuevamente para chequear que es la dirección correcta.
-Para la entrega 2 se quitó la opción Vender y se agregó Operador Inmobiliario que tiene login.
-Usuario: Juan
-Password: 2222
+Dado que con la lógica que fue pensado para la Entrega 1 y 2, no aplicaba para esta entrega, se tuvo que modificar sustancialmente.
+La idea en la Entrega 2 era tener acceso a un visitante y a un operador inmobiliario.
+Para esta entrega no llegué a implementar la parte del operador inmobiliario.
+Además de que no queda bien que el inicio de la página sean 2 botones.
+Pero se mantuvo la lógica del visitante teniendo que colocar su dirección de email para que se le pueda enviar información.
 */
 //import { propiedades_disponibles } from "./helpers/data.js";
 
@@ -58,7 +58,7 @@ const propiedades_disponibles = [
 },
 ];
 
-
+let email_dir; // variable para capturar la dirección de correo del visitante
 
 //Opción Visitante pide que ingrese el correo para luego enviarle la información de lo solicitado
 
@@ -127,7 +127,10 @@ function valido_email(e) {
     console.log(email_2.value);
 
     if (email_1.value === email_2.value){
+        email_dir = email_1.value;
         mostrar_propiedades();
+        const borro_mensaje_error = document.getElementById("mensaje_inicio");
+        borro_mensaje_error.innerHTML = "";
     }
     else {
         const mensaje = document.getElementById("mensaje_inicio");
@@ -136,7 +139,9 @@ function valido_email(e) {
 }
 
 function mostrar_propiedades() {
-    const contenedor = document.querySelector('.box_propiedad');  
+console.log("estoy en mostrar propiedad");    
+    const contenedor = document.querySelector('.box_propiedad');
+    contenedor.innerHTML ="";  
     for (const propiedad of propiedades_disponibles) {
         contenedor.innerHTML += `
         <article id=${propiedad.id} class="box">
@@ -157,34 +162,41 @@ let listado= [];
 
 if (localStorage.getItem('listado')) {
     listado = JSON.parse(localStorage.getItem('listado'));
-    console.log(listado)
 }
 
 function solicitarInformacion(id) {
-    console.log ("solicito información");
     const info_propiedad = propiedades_disponibles.find((propiedad) => propiedad.id === id);
+console.log("en solicitar informacion");
+console.log(info_propiedad);    
     // Si la propiedad no se agregó, incluirla
-    if (info_propiedad && !listado.some((item) => item.id === id)) {
+    if (info_propiedad && (!listado.some((item) => item.id === id))){
+        // cambio el id para que no queden 2 elementos con el mismo id
         listado.push(info_propiedad);
+        listado.id = "duplicado_" + info_propiedad.id;
         localStorage.setItem('listado', JSON.stringify(listado));
-        console.log(listado)
+console.log(listado);
     }
     mostrarListadoPropiedades();
 
 }
 
 function mostrarListadoPropiedades() {
+
      const listado_elementos = document.querySelector('.lado_derecho');
      listado_elementos.innerHTML = '';
      const titulo = document.createElement("h3");
      titulo.innerHTML= `
      <h3>PROPIEDADES SELECCIONADAS</h3>
+     <h3> Le enviaremos la información a: ${email_dir}</h3>
      `
      listado_elementos.appendChild(titulo);
 
      listado.forEach((item) => {
+
          const listadoItem = document.createElement('div');
-         //listadoItem.classList.add('carrito-item');
+         // agrego id al div para poder borrarlo
+         listadoItem.setAttribute("id", `${item.id}`);
+
          listadoItem.innerHTML = `
          <article class="listado_contenedor">
             <img src=${item.foto} alt='imagen de la propiedad en barrio ${item.barrio}'>
@@ -198,7 +210,7 @@ function mostrarListadoPropiedades() {
 
          const eliminarButton = listadoItem.querySelector('.boton_eliminar');
          eliminarButton.addEventListener('click', () => {
-             borrar_propiedad(item.id);
+             borrar_propiedad(listadoItem.id);
          });
 
          listado_elementos.appendChild(listadoItem);
@@ -207,21 +219,23 @@ function mostrarListadoPropiedades() {
 }
 
 function borrar_propiedad(id) {
+
     const index = listado.findIndex((item) => item.id === id);
 
     if (index !== -1) {
         listado.splice(index, 1);
         localStorage.setItem('listado', JSON.stringify(listado));
-
         const listadoElement = document.querySelector('.lado_derecho');
         const itemElement = document.getElementById(id);
 
         if (itemElement) {
             itemElement.remove();
         }
-
-       mostrarListadoPropiedades();
+        mostrar_propiedades();
+        mostrarListadoPropiedades();
     }
+
+
 }
 
 

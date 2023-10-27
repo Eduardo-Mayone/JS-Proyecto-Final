@@ -1,4 +1,4 @@
-/* Es el portal de una inmobiliaria.
+/* Es el portal de una inmobiliaria. Entrega 2
  En la entrega 1 era un sitio web sin login y se enviaba información por email, lo que se hace es solicitarle al usuario
  que ingrese su dirección de email y que la ingrese nuevamente para chequear que es la dirección correcta.
 Para la entrega 2 se quitó la opción Vender y se agregó Operador Inmobiliario que tiene login.
