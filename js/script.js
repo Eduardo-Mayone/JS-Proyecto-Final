@@ -13,7 +13,7 @@ const propiedades_disponibles = [
         barrio: "Aguada",
         tipo: "Casa",
         modalidad: "Venta",
-        foto:"../assets/images/aguada_a1.jpg",
+        foto:"./assets/images/aguada_a1.jpg",
         precio: 110000,
     },
     {
@@ -21,7 +21,7 @@ const propiedades_disponibles = [
         barrio: "Carrasco",
         tipo: "Apartamento",
         modalidad: "Alquiler",
-        foto:"../assets/images/carrasco_c1.jpg",
+        foto:"./assets/images/carrasco_c1.jpg",
         precio: 22500,    
     },
     {
@@ -29,7 +29,7 @@ const propiedades_disponibles = [
         barrio: "Buceo",
         tipo: "Apartamento",
         modalidad: "Venta",
-        foto:"../assets/images/buceo_b1.jpg",
+        foto:"./assets/images/buceo_b1.jpg",
         precio: 54000,    
     },
     {
@@ -37,7 +37,7 @@ const propiedades_disponibles = [
         barrio: "Aguada",
         tipo: "Apartamento",
         modalidad: "Alquiler",
-        foto:"../assets/images/aguada_a2.jpg",
+        foto:"./assets/images/aguada_a2.jpg",
         precio: 16500,    
     },
     {
@@ -45,7 +45,7 @@ const propiedades_disponibles = [
         barrio: "Aguada",
         tipo: "Apartamento",
         modalidad: "Alquiler",
-        foto:"../assets/images/aguada_a3.jpg",
+        foto:"./assets/images/aguada_a3.jpg",
         precio: 13500,    
     },
     {
@@ -53,7 +53,7 @@ const propiedades_disponibles = [
     barrio: "Aguada",
     tipo: "Apartamento",
     modalidad: "Venta",
-    foto:"../assets/images/aguada_a4.jpg",
+    foto:"./assets/images/aguada_a4.jpg",
     precio: 223500,    
 },
 ];
