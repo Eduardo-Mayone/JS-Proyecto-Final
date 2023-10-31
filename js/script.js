@@ -122,9 +122,7 @@ function valido_email(e) {
     e.preventDefault();
     const email_1 = document.getElementById("email_1");
     const email_2 = document.getElementById("email_2");
-    console.log("en valido email");
-    console.log(email_1.value);
-    console.log(email_2.value);
+
 
     if (email_1.value === email_2.value){
         email_dir = email_1.value;
@@ -140,7 +138,7 @@ function valido_email(e) {
 
 // muestra todas la propiedades disponibles
 function mostrar_propiedades() {
-console.log("estoy en mostrar propiedad");    
+
     const contenedor = document.querySelector('.box_propiedad');
     contenedor.innerHTML ="";  
     for (const propiedad of propiedades_disponibles) {
@@ -168,15 +166,14 @@ if (localStorage.getItem('listado')) {
 // agrega en listado las propiedades sobre las cuales se quiere información
 function solicitarInformacion(id) {
     const info_propiedad = propiedades_disponibles.find((propiedad) => propiedad.id === id);
-console.log("en solicitar informacion");
-console.log(info_propiedad);    
+
     // Si la propiedad no se agregó, incluirla
     if (info_propiedad && (!listado.some((item) => item.id === id))){
         // cambio el id para que no queden 2 elementos con el mismo id
         listado.push(info_propiedad);
         listado.id = "duplicado_" + info_propiedad.id;
         localStorage.setItem('listado', JSON.stringify(listado));
-console.log(listado);
+
     }
     mostrarListadoPropiedades();
 }
