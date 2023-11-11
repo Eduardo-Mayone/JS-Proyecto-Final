@@ -5,58 +5,60 @@ Para esta entrega no llegué a implementar la parte del operador inmobiliario.
 Además de que no queda bien que el inicio de la página sean 2 botones.
 Pero se mantuvo la lógica del visitante teniendo que colocar su dirección de email para que se le pueda enviar información.
 */
-//import { propiedades_disponibles } from "./helpers/data.js";
+import { propiedades_disponibles } from "./helpers/data.js";
 
-const propiedades_disponibles = [
-    {
-        id:"a1" ,
-        barrio: "Aguada",
-        tipo: "Casa",
-        modalidad: "Venta",
-        foto:"./assets/images/aguada_a1.jpg",
-        precio: 110000,
-    },
-    {
-        id:"c1" ,
-        barrio: "Carrasco",
-        tipo: "Apartamento",
-        modalidad: "Alquiler",
-        foto:"./assets/images/carrasco_c1.jpg",
-        precio: 22500,    
-    },
-    {
-        id:"b1" ,
-        barrio: "Buceo",
-        tipo: "Apartamento",
-        modalidad: "Venta",
-        foto:"./assets/images/buceo_b1.jpg",
-        precio: 54000,    
-    },
-    {
-        id:"a2" ,
-        barrio: "Aguada",
-        tipo: "Apartamento",
-        modalidad: "Alquiler",
-        foto:"./assets/images/aguada_a2.jpg",
-        precio: 16500,    
-    },
-    {
-        id:"a3" ,
-        barrio: "Aguada",
-        tipo: "Apartamento",
-        modalidad: "Alquiler",
-        foto:"./assets/images/aguada_a3.jpg",
-        precio: 13500,    
-    },
-    {
-    id:"a4" ,
-    barrio: "Aguada",
-    tipo: "Apartamento",
-    modalidad: "Venta",
-    foto:"./assets/images/aguada_a4.jpg",
-    precio: 223500,    
-},
-];
+// const propiedades_disponibles = [
+//     {
+//         id:"a1" ,
+//         barrio: "Aguada",
+//         tipo: "Casa",
+//         modalidad: "Venta",
+//         foto:"./assets/images/aguada_a1.jpg",
+//         precio: 110000,
+//     },
+//     {
+//         id:"c1" ,
+//         barrio: "Carrasco",
+//         tipo: "Apartamento",
+//         modalidad: "Alquiler",
+//         foto:"./assets/images/carrasco_c1.jpg",
+//         precio: 22500,    
+//     },
+//     {
+//         id:"b1" ,
+//         barrio: "Buceo",
+//         tipo: "Apartamento",
+//         modalidad: "Venta",
+//         foto:"./assets/images/buceo_b1.jpg",
+//         precio: 54000,    
+//     },
+//     {
+//         id:"a2" ,
+//         barrio: "Aguada",
+//         tipo: "Apartamento",
+//         modalidad: "Alquiler",
+//         foto:"./assets/images/aguada_a2.jpg",
+//         precio: 16500,    
+//     },
+//     {
+//         id:"a3" ,
+//         barrio: "Aguada",
+//         tipo: "Apartamento",
+//         modalidad: "Alquiler",
+//         foto:"./assets/images/aguada_a3.jpg",
+//         precio: 13500,    
+//     },
+//     {
+//     id:"a4" ,
+//     barrio: "Aguada",
+//     tipo: "Apartamento",
+//     modalidad: "Venta",
+//     foto:"./assets/images/aguada_a4.jpg",
+//     precio: 223500,    
+// },
+// ];
+
+console.log(propiedades_disponibles);
 
 let email_dir; // variable para capturar la dirección de correo del visitante
 
