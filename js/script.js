@@ -28,10 +28,16 @@ function pedirCorreo () {
         <input type="email" id="email_2" name="email_2">
     </div>
     <button class="enviar" type="submit">Enviar</button>
-</form>`;
-document.getElementById("boton_operador").disabled = true;
-despliego_formulario();
-
+    </form>`;
+   
+    // remover botones
+    const boton_vis = document.querySelector("#boton_visitante");
+    const boton_op = document.querySelector("#boton_operador");
+    if (boton_vis && boton_op) {
+        boton_vis.remove();
+        boton_op.remove();
+    }    
+    despliego_formulario();
 }
 
 
@@ -79,21 +85,18 @@ function valido_email(e) {
             icon: "success"
         }).then ((result) => {  // carga las propiedades después del ok en sweetAlert
             if (result.isConfirmed) {
-            // remover formulario y botones
-               const root = document.querySelector("#root");
-               const borro_botones = document.querySelector(".botones_inicio");
-               root.removeChild(borro_botones);
-            // agregar título "Propiedades disponibles"                
-               traerPropiedades(); //
+              // remover formulario
+                const borro_form = document.querySelector(".formulario_visitante");
+                borro_form.remove();
+                traerPropiedades(); //
             }
 
         })
-       const borro_mensaje_error = document.getElementById("mensaje_inicio");
-        borro_mensaje_error.innerHTML = "";
+
     }
     else {
-        const mensaje = document.getElementById("mensaje_inicio");
-        mensaje.innerHTML = `Las direcciones no coinciden`;
+        // const mensaje = document.getElementById("mensaje_inicio");
+        // mensaje.innerHTML = `Las direcciones no coinciden`;
         Swal.fire({
             title: "Las direcciones no coinciden",
             text: "Por favor intente nuevamente",
@@ -104,16 +107,43 @@ function valido_email(e) {
 }
 
 // muestra todas la propiedades disponibles
+// function mostrar_propiedades(props) {
+
+//     const mitad_izq = document.querySelector(".lado_izquierdo");
+//     mitad_izq.innerHTML = `<h2> Propiedades Disponibles</h2>`;
+//     const contenedor = document.querySelector('.box_propiedad');
+//     contenedor.innerHTML =`<p> lllllll</p>`;  
+//     for (const propiedad of props) {
+//         contenedor.innerHTML += `
+//         <article id=${propiedad.id} class="box">
+        
+//             <div class="propiedad_body">
+//                 <h3>${propiedad.tipo} en barrio: ${propiedad.barrio}</h3>
+//                 <img src= ${propiedad.foto} alt= "imagen propiedad">
+//                 <h3>En ${propiedad.modalidad}</h3>
+//                 <h3>Valor: <i>$${propiedad.precio}</i></h3>
+//                 <button class= "boton_solicitar" onclick="solicitarInformacion('${propiedad.id}')">Solicitar Información</button>
+            
+//             </div>
+//         </article>`;
+//     }
+// console.log(contenedor);
+//    // mitad_izq.appendChild(contenedor);
+// }
+
 function mostrar_propiedades(props) {
 
-    const contenedor = document.querySelector('.box_propiedad');
-    contenedor.innerHTML ="";  
+    const mitad_izq = document.querySelector(".lado_izquierdo");
+    mitad_izq.innerHTML = `<h2> Propiedades Disponibles</h2>`;
+    const contenedor = document.createElement('section');
+    contenedor.setAttribute("class", "box_propiedad");
+    contenedor.innerHTML =``;  
     for (const propiedad of props) {
         contenedor.innerHTML += `
         <article id=${propiedad.id} class="box">
         
             <div class="propiedad_body">
-                <h3>${propiedad.tipo} en barrio: ${propiedad.barrio}</h3>
+                <h3>${(propiedad.tipo).toUpperCase()} en barrio: ${propiedad.barrio}</h3>
                 <img src= ${propiedad.foto} alt= "imagen propiedad">
                 <h3>En ${propiedad.modalidad}</h3>
                 <h3>Valor: <i>$${propiedad.precio}</i></h3>
@@ -122,7 +152,16 @@ function mostrar_propiedades(props) {
             </div>
         </article>`;
     }
+    mitad_izq.appendChild(contenedor);
+    const boton_salir = document.createElement('button');
+    boton_salir.setAttribute("class", "boton_salir");
+    boton_salir.textContent = "Salir";
+    boton_salir.addEventListener("click", () => location.reload());
+    mitad_izq.appendChild(boton_salir);
 }
+
+
+
 
 let listado= [];
 
