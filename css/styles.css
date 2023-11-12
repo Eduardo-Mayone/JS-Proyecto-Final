@@ -31,6 +31,13 @@ main {
     max-height: 100%;
     
 }
+.inicio {
+    height: 400px;
+    width: 100%;
+    background-image: url("../assets/images/fondo_inicio.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .mitades{
     display:flex;
     flex-wrap: nowrap;

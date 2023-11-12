@@ -1,9 +1,6 @@
 /* Es el portal de una inmobiliaria.
-Dado que con la lógica que fue pensado para la Entrega 1 y 2, no aplicaba para esta entrega, se tuvo que modificar sustancialmente.
-La idea en la Entrega 2 era tener acceso a un visitante y a un operador inmobiliario.
-Para esta entrega no llegué a implementar la parte del operador inmobiliario.
-Además de que no queda bien que el inicio de la página sean 2 botones.
-Pero se mantuvo la lógica del visitante teniendo que colocar su dirección de email para que se le pueda enviar información.
+Para visitantes y operadores inmobiliarios.
+La parte del operador inmobiliario es estético, para que no quedara un solo botón.
 */
 
 
@@ -41,28 +38,18 @@ function pedirCorreo () {
 }
 
 
-//Opción Operador Inmobiliario pide usuario y contraseña para agregar propiedad
+//Opción Operador Inmobiliario solamente es estético
 
-// let opcion_inicio_operador = document.getElementById("boton_operador");
-// opcion_inicio_operador.addEventListener("click", pedirUsuario);        
+let opcion_inicio_operador = document.getElementById("boton_operador");
+opcion_inicio_operador.addEventListener("click", () => {
+    Swal.fire({
+        title: "👷‍♂️",
+        text: "Próximamente",
+        icon:"warning",
+    }).then ( result => result.isConfirmed ? location.reload(): console.log("error"))
 
-// function pedirUsuario () {
-//     const formulario_operador = document.querySelector(".formulario_operador");
-//     formulario_operador.innerHTML = `
-//     <form id="ingrese_operador" class="ingreso_operador">
-//     <div>
-//         <label for="user">Usuario</label>
-//         <input type="text" id="user">
-//     </div>
-//     <div>
-//         <label for="clave">Contraseña</label>
-//         <input type="password" id="clave">
-//     </div>
-//     <button type="submit">Enviar</button>
-// </form>`;
-// document.getElementById("boton_visitante").disabled = true;
+});
 
-// }
 
 // Visitante chequeo que los correos sean iguales
   
