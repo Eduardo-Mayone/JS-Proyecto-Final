@@ -5,6 +5,7 @@
         "barrio":"Aguada",
         "tipo":"casa",
         "modalidad":"venta",
+        "foto":"./assets/images/aguada_a1.jpg",
         "precio":110000
     },
     {   
@@ -12,6 +13,7 @@
         "barrio":"Carrasco",
         "tipo":"apartamento",
         "modalidad":"alquiler",
+        "foto":"./assets/images/carrasco_c1.jpg",
         "precio":22500
     },
     {
@@ -19,28 +21,32 @@
         "barrio":"Buceo",
         "tipo":"apartamento",
         "modalidad":"venta",
+        "foto":"./assets/images/buceo_b1.jpg",
         "precio":54000
     },
     {
         "id":"a2",
-    "barrio":"Aguada",
-    "tipo":"apartamento",
-    "modalidad":"alquiler",
-    "precio":16500
+        "barrio":"Aguada",
+        "tipo":"apartamento",
+        "modalidad":"alquiler",
+        "foto":"./assets/images/aguada_a2.jpg",
+        "precio":16500
     },
     {
         "id":"a3",
-    "barrio":"Aguada",
-    "tipo":"apartamento",
-    "modalidad":"alquiler",
-    "precio":13500
+        "barrio":"Aguada",
+        "tipo":"apartamento",
+        "modalidad":"alquiler",
+        "foto":"./assets/images/aguada_a3.jpg",
+        "precio":13500
     },
     {
         "id":"a4",
-    "barrio":"Aguada",
-    "tipo":"apartamento",
-    "modalidad":"venta",
-    "precio":223500
+        "barrio":"Aguada",
+        "tipo":"apartamento",
+        "modalidad":"venta",
+        "foto":"./assets/images/aguada_a4.jpg",
+        "precio":223500
     }
   ]
 }
