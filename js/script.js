@@ -176,6 +176,7 @@ function mostrarListadoPropiedades() {
          const listadoItem = document.createElement('div');
          // agrego id al div para poder borrarlo
          listadoItem.setAttribute("id", `${item.id}`);
+         listadoItem.setAttribute("class", "div_prop_elegida");
 
          listadoItem.innerHTML = `
          <article class="listado_contenedor">
@@ -184,7 +185,7 @@ function mostrarListadoPropiedades() {
                 <p>Barrio: ${item.barrio} </p>
                 <p>Precio: $${item.precio}</p>
             </div>
-            <a class="boton_eliminar" data-id="${item.id}">Eliminar</a>
+            <button type= "button" class="boton_eliminar" data-id="${item.id}">Eliminar</button>
          </article>
        `;
 

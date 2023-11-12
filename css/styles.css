@@ -61,10 +61,7 @@ main {
     align-items: center;
 }
 
-.lado_derecho div {
-    width: 80%;
-    height: auto;
-}
+
 .lado_derecho h2 {
     text-align: center;
     font-size: 2rem;
@@ -88,7 +85,7 @@ main {
     color:azure;
 }
 
-.ingreso_correo{
+.ingreso_correo {
     height: 120px;
     padding:10px;
     display: flex;
@@ -148,6 +145,10 @@ main {
     gap: 5px;
 }
 
+.div_prop_elegida {
+    width: 80%;
+    height: auto;
+}
 
 .propiedad_body img {
     width: 95%;
@@ -162,7 +163,7 @@ main {
     background-color:  rgb(81, 81, 168);
     color:azure;
 }
-.propiedad_body button:hover {
+.propiedad_body button:hover , .listado_contenedor button:hover {
     background-color:rgb(167, 13, 13);
     box-shadow: 3px 3px 3px rgb(10, 10, 10);
 
@@ -182,7 +183,6 @@ main {
     justify-content: space-around;
     background-color: rgb(208, 210, 211);
     padding: 10px;
-
 }
 
 
@@ -195,18 +195,20 @@ main {
 }
 
  .boton_eliminar  {
+    height: auto;
     font-size: 1rem;
     padding: 5px;
-    color: rgb(247, 8, 8);
-    background-color: black;
+    color: azure;
+    background-color: rgb(81, 81, 168);
     text-align: center;
-
 }
 
 .boton_salir {
-    width: 60px;
-    height: 35px;
+    width: 80px;
+    height: auto;
     padding: 5px;
+    font-size: 1rem;
+    font-weight: bold;
     position:fixed;
     bottom: 20px;
     right: 20px;
