@@ -95,8 +95,7 @@ function valido_email(e) {
 
     }
     else {
-        // const mensaje = document.getElementById("mensaje_inicio");
-        // mensaje.innerHTML = `Las direcciones no coinciden`;
+
         Swal.fire({
             title: "Las direcciones no coinciden",
             text: "Por favor intente nuevamente",
@@ -106,30 +105,6 @@ function valido_email(e) {
     }
 }
 
-// muestra todas la propiedades disponibles
-// function mostrar_propiedades(props) {
-
-//     const mitad_izq = document.querySelector(".lado_izquierdo");
-//     mitad_izq.innerHTML = `<h2> Propiedades Disponibles</h2>`;
-//     const contenedor = document.querySelector('.box_propiedad');
-//     contenedor.innerHTML =`<p> lllllll</p>`;  
-//     for (const propiedad of props) {
-//         contenedor.innerHTML += `
-//         <article id=${propiedad.id} class="box">
-        
-//             <div class="propiedad_body">
-//                 <h3>${propiedad.tipo} en barrio: ${propiedad.barrio}</h3>
-//                 <img src= ${propiedad.foto} alt= "imagen propiedad">
-//                 <h3>En ${propiedad.modalidad}</h3>
-//                 <h3>Valor: <i>$${propiedad.precio}</i></h3>
-//                 <button class= "boton_solicitar" onclick="solicitarInformacion('${propiedad.id}')">Solicitar Información</button>
-            
-//             </div>
-//         </article>`;
-//     }
-// console.log(contenedor);
-//    // mitad_izq.appendChild(contenedor);
-// }
 
 function mostrar_propiedades(props) {
 
@@ -191,7 +166,7 @@ function mostrarListadoPropiedades() {
      listado_elementos.innerHTML = '';
      const titulo = document.createElement("h3");
      titulo.innerHTML= `
-     <h3>PROPIEDADES SELECCIONADAS</h3>
+     <h2>Propiedades Seleccionadas</h2>
      <h3> Le enviaremos la información a: ${email_dir}</h3>
      `
      listado_elementos.appendChild(titulo);

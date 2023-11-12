@@ -51,15 +51,24 @@ main {
 
 
 .lado_derecho {
-    width: 25%;
+    width: 35%;
     height: auto;
     padding: 10px;
     margin: 10px;
     gap: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
+.lado_derecho div {
+    width: 80%;
+    height: auto;
+}
+.lado_derecho h2 {
+    text-align: center;
+    font-size: 2rem;
+}
 
 .botones_inicio{
     position: relative;
@@ -162,7 +171,7 @@ main {
 
 .lado_derecho h3 {
     font-size: 1rem;
-    padding-bottom: 5px;
+    padding: 5px;
 }
 
 .listado_contenedor {
@@ -175,6 +184,7 @@ main {
     padding: 10px;
 
 }
+
 
 .listado_card p {
     font-size: 1rem;
