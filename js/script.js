@@ -208,7 +208,6 @@ function borrar_propiedad(id) {
 
 // traerPropiedades, obtiene las propiedades disponibles y las almacena en la variable global propiedades_disponibles
 function traerPropiedades () {
-    // fetch("./js/propiedades.json")
     fetch("./js/helpers/data.json")
         .then((resp) => {
             if (!resp.ok) {
