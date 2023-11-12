@@ -61,10 +61,8 @@ despliego_formulario();
 // Visitante chequeo que los correos sean iguales
   
 function despliego_formulario () {
-
 const formulario = document.getElementById("ingrese_email")
 formulario.addEventListener("submit", valido_email);
-
 }
 
 // función para comprobar que el email y su reingreso coinciden
@@ -72,7 +70,6 @@ function valido_email(e) {
     e.preventDefault();
     const email_1 = document.getElementById("email_1");
     const email_2 = document.getElementById("email_2");
-
 
     if (email_1.value === email_2.value && email_1.value){
         email_dir = email_1.value;
@@ -82,14 +79,16 @@ function valido_email(e) {
             icon: "success"
         }).then ((result) => {  // carga las propiedades después del ok en sweetAlert
             if (result.isConfirmed) {
-               traerPropiedades();
+            // remover formulario y botones
+               const root = document.querySelector("#root");
+               const borro_botones = document.querySelector(".botones_inicio");
+               root.removeChild(borro_botones);
+            // agregar título "Propiedades disponibles"                
+               traerPropiedades(); //
             }
 
         })
-        
-        
-        
-        const borro_mensaje_error = document.getElementById("mensaje_inicio");
+       const borro_mensaje_error = document.getElementById("mensaje_inicio");
         borro_mensaje_error.innerHTML = "";
     }
     else {
@@ -99,16 +98,17 @@ function valido_email(e) {
             title: "Las direcciones no coinciden",
             text: "Por favor intente nuevamente",
             icon: "error"
-          });
+          }).then ( result => result.isConfirmed ? pedirCorreo(): console.log("error"))
+          
     }
 }
 
 // muestra todas la propiedades disponibles
-function mostrar_propiedades(propiedades_disponibles) {
+function mostrar_propiedades(props) {
 
     const contenedor = document.querySelector('.box_propiedad');
     contenedor.innerHTML ="";  
-    for (const propiedad of propiedades_disponibles) {
+    for (const propiedad of props) {
         contenedor.innerHTML += `
         <article id=${propiedad.id} class="box">
         
@@ -204,20 +204,20 @@ function borrar_propiedad(id) {
 
 }
 
-// traerPropiedades, obtiene las propiedades disponibles
+// traerPropiedades, obtiene las propiedades disponibles y las almacena en la variable global propiedades_disponibles
 function traerPropiedades () {
     fetch("./js/propiedades.json")
-    .then((resp) => {
-       return resp.json()
-    })
-    .then((data) => {
-         console.log(typeof (data));
-         console.log(data);
-         const {propiedades} = data;
-         propiedades_disponibles = propiedades;
-         //return data.propiedades;
-         console.log (propiedades_disponibles);
-         mostrar_propiedades(propiedades_disponibles);
-    })
+        .then((resp) => {
+            if (!resp.ok) {
+                throw new Error('Error al obtener los datos.');
+            }        
+            return resp.json()
+        })
+        .then((data) => {
+             const {propiedades} = data;
+             propiedades_disponibles = propiedades;
+             mostrar_propiedades(propiedades_disponibles);
+        })
+        .catch(error => console.log("Hubo un error: ", error));
     
 }
